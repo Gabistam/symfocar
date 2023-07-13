@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{product.name}} - SymfoCar{% endblock %}
+
+{% block body %}
+
+
+<div class="wrapper">
+    <h1>{{ product.name }}</h1>
+
+
+    <div class="row">
+        <div class="col-md-6">
+            <img src="{{ asset('assets/images/uploads/' ~ product.illustration) }}" alt="{{ product.name }}" class="img-fluid">
+        </div>
+        <div class="col-md-6">
+            <div class="btns">
+                <a href="{{ path('add_to_cart', {'id':product.id} )}}" >
+                    <a href="{{path('add_to_cart', { 'id' : product.id})}}"><img src="{{ asset('assets/images/icons/cart-plus-solid-blue.svg') }}" alt="add" height="50px" ></a>
+                </a>
+                <a href="{{ path('app_cart')}}" class="btn btn-success">Aller au panier</a>
+            </div>
+
+            <h2>{{ product.subtitle }}</h2>
+            <p class="my-2 fs-3 fw-bold text-primary">{{ (product.price /100)|number_format(0,',', ' ') }} € </p> <hr>
+            <span>Energie: {{ product.energy }}</span> <br>
+            <span>Carrosserie: {{ product.category }}</span> <br>
+            <p>
+                <a class="text-decoration-none mt-2" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="true" aria-controls="collapseExample">
+                    Afficher description
+                </a>
+            </p>
+            <div class="collapse" id="collapseExample" style="">
+                <div class="card card-body">
+                    <p class="card-text fs-6 text-justify">
+                        {{ product.description }}
+                    </p>
+                    <a href="{{ path('add_to_cart', {'id':product.id} )}}" class="btn btn-primary mb-4">Commander</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <a class="btn btn-primary" href="{{path('app_products')}}">Liste des voitures</a>
+
+</div>
+
+{% endblock %}

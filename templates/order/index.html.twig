@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Valider ma commande - Symfocars{% endblock %}
+
+{% block body %}
+
+
+<div class="wrapper">
+   <h1>Valider ma commander</h1>
+    <hr>
+    <p class="mt-5 mb-5">{{app.user.firstname}}, veuillez choisir vos préférences avant de passer votre commande</p>  
+
+    <div class="row">
+        <div class="col-md-6">
+            <h4>Choisir mon adresse de livraison</h4>
+            <hr>
+            {{form(form)}}
+        </div>
+        <div class="col-md-6">
+            <h4>Choisir mon adresse de facturation</h4>
+            <hr>
+        </div>
+    </div>
+    <hr>
+
+
+
+</div>
+{% endblock %}

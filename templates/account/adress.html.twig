@@ -1,0 +1,56 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mes adresses - Symfocars{% endblock %}
+
+{% block body %}
+
+
+    <div class="wrapper">
+        <a href="{{path('app_account_adress_add')}}" class="btn btn-info btn-sm float-right">Ajouter une adresse</a>
+        <h1>Mes adresses</h1>
+        </hr>
+        <h4>{{app.user.firstname}}, c'est dans cet espace que vous allez pouvoir gérer toutes vos adresses</h4>
+
+        </p>
+
+        <a href="{{path('app_account')}}" class="btn btn-primary" role="button">Retour</a>
+
+        </hr>
+        <h3>Vue de mes adresses</h3> <br>
+        <div class="container">
+            {% if app.user.adresses|length == 0 %}
+                <p class="text-center">
+                    Vous n'avez pas encore enregistré d'adresse. <br>
+                    <a href="{{path('app_account_adress_add')}}" class="btn btn-info btn-sm">Ajouter une adresse</a>
+                </p>
+                {% else %}
+                    <div class="row g-2">
+                        {% for adress in app.user.adresses %}
+                            <div class="col-4">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h5 class="card-title">{{adress.name}}</h5>
+                                        <p class="card-text">
+                                            {{adress.firstname}} {{adress.lastname}} <br>
+                                            {{adress.adresse}} <br>
+                                            {{adress.cp}} {{adress.ville}} <br>
+                                            {{adress.pays}}
+                                        </p>
+                                        <a href="{{path('app_account_adress_edit', {'id': adress.id})}}"
+                                            class="btn btn-primary">Modifier</a> <a
+                                            href="{{path('app_account_adress_delete', {'id' : adress.id})}}"
+                                            class="btn btn-danger">Supprimer</a>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                        {% endfor %}
+                    </div>
+                <a href="{{path('app_account_adress_add')}}" class="btn btn-info btn-sm">Ajouter une adresse</a>
+
+            {% endif %}
+        </div>
+
+    </div>
+{% endblock %}

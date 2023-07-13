@@ -1,0 +1,8 @@
+controllers:
+    resource: ../src/Controller/
+    type: attribute
+
+cart:
+    path: /cart
+    controller: App\Controller\CartController::index
+    methods: GET

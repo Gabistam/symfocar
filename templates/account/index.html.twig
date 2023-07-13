@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mon compte - Symfocars{% endblock %}
+
+{% block body %}
+
+
+<div class="wrapper">
+   <h1>Mon Compte</h1>
+    <hr>
+    <h4>Bonjour {{app.user.firstname}},</h4>  
+
+    <p>Bienvenu dans votre espace </p>
+    </p>
+    <hr>
+
+    <a href="{{path('app_accountPassword')}}" class="btn btn-primary" role="button"> Modifier mon mot de passe</a>
+    <a href="{{path('app_account_adress')}}" class="btn btn-primary" role="button"> Gérer mes adresses</a>
+
+
+</div>
+{% endblock %}
