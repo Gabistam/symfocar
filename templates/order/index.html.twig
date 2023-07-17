@@ -12,12 +12,16 @@
 
     <div class="row">
         <div class="col-md-6">
-            <h4>Choisir mon adresse de livraison</h4>
+            <b>Choisir mon adresse de livraison</b>
             <hr>
-            {{form(form)}}
+            {% set formhtml %}
+                {{form(form)}}
+            {% endset %}
+            
+            {{formhtml|replace({'[br]' : '<br/>'})|raw}}
         </div>
         <div class="col-md-6">
-            <h4>Choisir mon adresse de facturation</h4>
+            <b>Choisir mon adresse de facturation</b>
             <hr>
         </div>
     </div>

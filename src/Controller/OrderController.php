@@ -12,7 +12,14 @@ class OrderController extends AbstractController
     #[Route('/commande', name: 'app_order')]
     public function index(): Response
     {
-        $form = $this->createForm(OrderType::class);
+        if ($this->getUser()->getAdresses()->isEmpty()) {
+
+            return $this->redirectToRoute('app_account_adress_add');
+        }
+
+        $form = $this->createForm(OrderType::class, null, [
+            'user' => $this->getUser()
+        ]);
 
 
         return $this->render('order/index.html.twig', 

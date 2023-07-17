@@ -171,7 +171,7 @@ class Adress
 
     public function __toString(): string
     {
-        return $this->getName();
+        return $this->getName().'[br]'.$this->getAdresse().'[br]'.$this->getCP().' '.$this->getVille().' - '.$this->getPays();
     }
 
 }
