@@ -5,10 +5,11 @@ namespace App\Form;
 use App\Entity\Adress;
 use App\Entity\Carrier;
 use App\Form\AdressType;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
 class OrderType extends AbstractType
 {
@@ -24,7 +25,7 @@ class OrderType extends AbstractType
                 'multiple' => false,
                 'expanded' => true,
                 'attr' => [
-                    'class' => 'col-md-6'
+                    'class' => 'col-md-12'
                 ]
             ])
             ->add('carrier', EntityType::class, [
@@ -34,7 +35,13 @@ class OrderType extends AbstractType
                 'multiple' => false,
                 'expanded' => true,
                 'attr' => [
-                    'class' => 'col-md-9'
+                    'class' => 'col-md-12'
+                ]
+            ])
+            ->add('submit', SubmitType::class, [
+                'label' => 'Valider ma commande',
+                'attr' => [
+                    'class' => 'btn btn-primary btn-block col-md-12'
                 ]
             ])
         ;

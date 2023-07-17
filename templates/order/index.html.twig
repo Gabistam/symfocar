@@ -10,8 +10,8 @@
     <hr>
     <p class="mt-5 mb-5">{{app.user.firstname}}, veuillez choisir vos préférences avant de passer votre commande</p>  
 
-    <div class="row">
-        <div class="col-md-6">
+    <div class="row text-center ">
+        <div class="col-md-6 p-4">
             <b>Choisir mon adresse de livraison</b>
             <hr>
             {% set formhtml %}
@@ -20,12 +20,28 @@
             
             {{formhtml|replace({'[br]' : '<br/>'})|raw}}
         </div>
-        <div class="col-md-6">
-            <b>Choisir mon adresse de facturation</b>
+        <div class="col-md-6 p-4">
+            <b>Récap de ma commande</b>
             <hr>
+            <div class="order-summary ">
+
+                {% for product in cart %}
+                    <div class="row">
+                        <div class="col-4"><img src="{{ asset('assets/images/uploads/' ~ product.product.illustration) }}" alt="{{product.product.name}}" height="75px"></div>
+                        <div class="col-6 my-auto">{{product.product.name}} <br>
+                            <small>{{product.product.subtitle}}</small>
+                        </div>
+                        <div class="col-2 my-auto">X {{product.quantity}}</div>
+                    </div>
+                    
+                {% endfor %}
+            </div>
+
         </div>
     </div>
-    <hr>
+    <button type="submit" class="btn btn-primary btn-block mb-4 col-md-12">Valider ma commande</button>
+    
+    
 
 
 
