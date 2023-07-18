@@ -6,7 +6,7 @@
 
 
     <div class="wrapper">
-        <a href="{{path('app_account_adress')}}" class="btn btn-danger" role="button">Annuler</a>
+        <a href="{{path('app_account_adress')}}" class="btn btn-danger current-btn" role="button">Annuler</a>
         <h1>Ajouter une adresse</h1>
         
         </hr>
@@ -21,7 +21,7 @@
                 <div class="col-md-6">{{ form_row(form.adresse) }}</div>
                 <div class="col-md-6">{{ form_row(form.cp) }}</div>
                 <div class="col-md-6">{{ form_row(form.ville) }}</div>
-                <div class="col-md-6">{{ form_row(form.pays) }}</div>
+                <div class="col-md-6">{{ form_row(form.pays) }}</div> 
             </div>
         {{form_end(form)}}
 
