@@ -1,9 +1,5 @@
 {% extends 'base.html.twig' %}
 
-{% block javascript %}
-    <script src="https://js.stripe.com/v3/"></script>
-{% endblock %}
-
 {% block title %}paiement de ma commande - Symfocars{% endblock %}
 
 {% block body %}
@@ -83,29 +79,8 @@
 </div>
 {% endblock %}
 
-{% block script %}
-    <script type="text/javascript">
-        let stripe = Stripe('pk_live_51NSo1eKc3MKUkqYC975CGBwmLA1DpyD33YNxGMhiIx5SwFV0Azqade50pgtnHmMj4TvpXFn0DyDysUhuFS7eVaIM002KKmA61W'); 
-        let checkoutButton = document.getElementById('checkout-button');
-        checkoutButton.addEventListener('click', function() {
-            // Ajoutez la référence de la commande à l'URL de la requête fetch
-            fetch('/commande/create-session/{{ reference }}', {
-                method: "POST",
-            })
-            .then(function(response) {
-                return response.json();
-            })
-            .then(function(session) {
-                return stripe.redirectToCheckout({ sessionId: session.id });
-            })
-            .then(function(result) {
-                if (result.error) {
-                    alert(result.error.message);
-                }
-            })
-            .catch(function(error) {
-                console.error('Error:', error);
-            });
-        });
-    </script>
+{% block javascript %}
+    <script src="https://js.stripe.com/v3/"></script>
+    <script src="{{ asset('assets/js/stripe.js') }}"></script>
+
 {% endblock %}

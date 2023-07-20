@@ -66,6 +66,8 @@ class OrderController extends AbstractController
             $delivery_content .= '<br/>'.$delivery->getAdresse();
             $delivery_content .= '<br/>'.$delivery->getCP().' '.$delivery->getVille();
             $delivery_content .= '<br/>'.$delivery->getPays();
+            $publicKey = $_ENV['STRIPE_PUBLIC_KEY'];
+            $secretKey = $_ENV['STRIPE_SECRET_KEY'];
 
 
             //enregistrer ma commande Order()
@@ -99,6 +101,8 @@ class OrderController extends AbstractController
                 'carrier'=>$carrier,
                 'delivery'=>$delivery_content,
                 'reference'=>$order->getReference(),
+                'publicKey'=>$publicKey,
+                'secretKey'=>$secretKey,
             ]
             );
         }
