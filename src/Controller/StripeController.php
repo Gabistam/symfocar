@@ -2,11 +2,12 @@
 
 namespace App\Controller;
 
-use App\Classe\Cart;
 use Stripe\Stripe;
+use App\Classe\Cart;
 use Stripe\Checkout\Session;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class StripeController extends AbstractController
@@ -44,7 +45,8 @@ class StripeController extends AbstractController
             'cancel_url' => $YOUR_DOMAIN . '/cancel.html',
         ]);
 
-        return $this->redirect($checkout_session->url, 303);
+        $response = new JsonResponse(['id' => $checkout_session->id]);
+        return $response;
 
         
     }
