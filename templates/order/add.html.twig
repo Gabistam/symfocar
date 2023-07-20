@@ -71,7 +71,7 @@
                 <hr>
                 <strong class="col-6">Total TTC</strong>
                 <div class="col-6 text-end">{{ (((total / 100) + carrier.price) * 1.2 )|number_format(2, ',', ' ') }} €</div>
-                <strong class="col-12 mt-5">Vous avez un code promo ?</strong>
+                {# <strong class="col-12 mt-5">Vous avez un code promo ?</strong>
                 <div class="col-12 mb-5">
                     <form action="" method="post">
                         <div class="input-group">
@@ -83,12 +83,14 @@
                     </form>
                     <small>Vous pourrez appliquer votre code promo à l'étape suivante</small>
 
-                </div>
+                </div> #}
             </div>
 
         </div>
         
-        <a href="" class="btn btn-success btn-block mt-3 current-btn mb-5">Payer   |  {{ (((total / 100) + carrier.price) * 1.2 )|number_format(2, ',', ' ') }} €</a>
+        <form action="{{path('app_stripe_create_session')}}" method="POST"> 
+        <button type="submit" class="btn btn-success btn-block mt-3 current-btn mb-5" id="checkout-button"> <strong>Payer   |  {{ (((total / 100) + carrier.price) * 1.2 )|number_format(2, ',', ' ') }} €</strong> </button>
+        </form>
     </div>
     
     
@@ -96,3 +98,31 @@
 
 </div>
 {% endblock %}
+
+{# {% block script %}
+    <script type="text/javascript">
+        let stripe = Stripe('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'); 
+        let checkoutButton = document.getElementById('checkout-button');
+        checkoutButton.addEventListener('click', function() {
+            fetch('/commande/create-session', {
+                method: 'POST',
+            })
+            .then(function(response) {
+                return response.json();
+            })
+            .then(function(session) {
+                return stripe.redirectToCheckout({ sessionId: session.id });
+            })
+            .then(function(result) {
+                if (result.error) {
+                    alert(result.error.message);
+                }
+            })
+            .catch(function(error) {
+                console.error('Error:', error);
+            });
+        });
+    </script>
+{% endblock %} #}
+
+
