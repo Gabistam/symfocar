@@ -5,6 +5,7 @@ namespace App\Controller;
 use Stripe\Stripe;
 use App\Classe\Cart;
 use App\Entity\Order;
+use App\Entity\User;
 use Stripe\Checkout\Session;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -79,8 +80,12 @@ class StripeController extends AbstractController
 
         Stripe::setApiKey($_ENV['STRIPE_SECRET_KEY']);
             
+        
 
         $checkout_session = Session::create([
+
+            /** @noinspection PhpUndefinedMethodInspection */
+            'customer_email' => $this->getUser()->getEmail(),
             'payment_method_types' => ['card'],
             'line_items' => [
                 $products_for_stripe
