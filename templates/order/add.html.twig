@@ -90,7 +90,7 @@
         
         <form action="{{path('app_stripe_create_session')}}" method="POST">
             <input type="hidden" name="reference" value="{{ reference }}">
-            <button type="submit" class="btn btn-success btn-block mt-3 current-btn mb-5" id="checkout-button">
+            <button type="submit" class="btn btn-success btn-block mt-3 current-btn mb-5 px-5" width="100%" id="checkout-button">
                 <strong>Payer | {{ (((total / 100) + carrier.price) * 1.2 )|number_format(2, ',', ' ') }} €</strong>
             </button>
         </form>
