@@ -47,64 +47,68 @@ class OrderController extends AbstractController
     }
 
     #[Route('/commande/recapitulatif', name: 'app_order_recap', methods: ['POST'])]
-    public function add(Cart $cart, Request $request): Response
-    {
-        $form = $this->createForm(OrderType::class, null, [
-            'user' => $this->getUser()
-        ]);
+public function add(Cart $cart, Request $request): Response
+{
+    $form = $this->createForm(OrderType::class, null, [
+        'user' => $this->getUser()
+    ]);
 
-        $form->handleRequest($request);
+    $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $date = new \DateTimeImmutable();
-            $carrier = $form->get('carrier')->getData();
-            $delivery = $form->get('addresses')->getData();
-            $delivery_content = $delivery->getFirstname().' '.$delivery->getLastname();
-            if ($delivery->getCompany()) {
-                $delivery_content .= '<br/>'.$delivery->getCompany();
-            }
-            $delivery_content .= '<br/>'.$delivery->getAdresse();
-            $delivery_content .= '<br/>'.$delivery->getCP().' '.$delivery->getVille();
-            $delivery_content .= '<br/>'.$delivery->getPays();
+    if ($form->isSubmitted() && $form->isValid()) {
+        $date = new \DateTimeImmutable();
+        $carrier = $form->get('carrier')->getData();
+        $delivery = $form->get('addresses')->getData();
+        $delivery_content = $delivery->getFirstname().' '.$delivery->getLastname();
+        if ($delivery->getCompany()) {
+            $delivery_content .= '<br/>'.$delivery->getCompany();
+        }
+        $delivery_content .= '<br/>'.$delivery->getAdresse();
+        $delivery_content .= '<br/>'.$delivery->getCP().' '.$delivery->getVille();
+        $delivery_content .= '<br/>'.$delivery->getPays();
 
 
-            //enregistrer ma commande Order()
-            $order= New Order();
-            $reference = $date->format('dmY').'-'.uniqid();
-            $order->setReference($reference);
-            $order->setUser($this->getUser());
-            $order->setCreatedAt($date);
-            $order->setCarrierName($carrier->getName());
-            $order->setCarrierPrice($carrier->getPrice());
-            $order->setDelivery($delivery_content);
-            $order->setIsPaid(0);
+        //enregistrer ma commande Order()
+        $order= new Order();
+        $reference = $date->format('dmY').'-'.uniqid();
+        $order->setReference($reference);
+        $order->setUser($this->getUser());
+        $order->setCreatedAt($date);
+        $order->setCarrierName($carrier->getName());
+        $order->setCarrierPrice($carrier->getPrice());
+        $order->setDelivery($delivery_content);
+        $order->setIsPaid(0);
 
-            $this->entityManager->persist($order);
+        // Calculate and set totalTTC
+        $totalTTC = ($order->getTotal() + $order->getCarrierPrice()) * 1.2;
+        $order->setTotalTTC($totalTTC);
 
-            foreach ($cart->getFull() as $product) {
-                $orderDetails = New OrderDetails();
-                $orderDetails->setMyOrder($order);
-                $orderDetails->setProduct($product['product']->getName());
-                $orderDetails->setQuantity($product['quantity']);
-                $orderDetails->setPrice($product['product']->getPrice());
-                $orderDetails->setTotal($product['product']->getPrice() * $product['quantity']);
-                $this->entityManager->persist($orderDetails);
-            }
+        $this->entityManager->persist($order);
 
-            $this->entityManager->flush();
-
-            return $this->render('order/add.html.twig', 
-            [
-                'cart'=>$cart->getFull(),
-                'carrier'=>$carrier,
-                'delivery'=>$delivery_content,
-                'reference'=>$order->getReference(),
-            ]
-            );
+        foreach ($cart->getFull() as $product) {
+            $orderDetails = New OrderDetails();
+            $orderDetails->setMyOrder($order);
+            $orderDetails->setProduct($product['product']->getName());
+            $orderDetails->setQuantity($product['quantity']);
+            $orderDetails->setPrice($product['product']->getPrice());
+            $orderDetails->setTotal($product['product']->getPrice() * $product['quantity']);
+            $this->entityManager->persist($orderDetails);
         }
 
-        return $this->redirectToRoute('app_cart');
+        $this->entityManager->flush();
 
+        return $this->render('order/add.html.twig', 
+        [
+            'cart'=>$cart->getFull(),
+            'carrier'=>$carrier,
+            'delivery'=>$delivery_content,
+            'reference'=>$order->getReference(),
+            'totalTTC' => $order->getTotalTTC(),
+        ]
+        );
+    }
 
-    } 
+    return $this->redirectToRoute('app_cart');
+} 
+ 
 }

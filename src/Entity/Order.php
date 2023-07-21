@@ -42,6 +42,9 @@ class Order
     #[ORM\Column(length: 255)]
     private ?string $reference = null;
 
+    #[ORM\Column]
+    private ?float $totalTTC = null;
+
     public function __construct()
     {
         $this->orderDetails = new ArrayCollection();
@@ -54,6 +57,19 @@ class Order
             $total += $product->getPrice() * $product->getQuantity();
         }
         return $total;
+    }
+
+    public function getTotalTTC(): float
+    {
+        $this->totalTTC = $totalTTC = $this->getTotal() + $this->getCarrierPrice();
+        return $totalTTC * 1.2;
+    }
+
+    public function setTotalTTC(float $totalTTC): self
+    {
+        $this->totalTTC = $totalTTC;
+
+        return $this;
     }
 
     public function getId(): ?int
@@ -174,4 +190,6 @@ class Order
 
         return $this;
     }
+
+    
 }
