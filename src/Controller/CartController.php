@@ -8,7 +8,6 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\Request;
 
 class CartController extends AbstractController
 {
@@ -17,25 +16,42 @@ class CartController extends AbstractController
     public function __construct(EntityManagerInterface $entityManager)
     {
         $this->entityManager = $entityManager;
-        
     }
 
     #[Route('/cart', name: 'app_cart')]
     public function index(Cart $cart)
     {
-        $cartComplete = [];
+        if (empty($cart->get())) {
+            return $this->redirectToRoute('app_products');
+        } else {
+            $cartComplete = [];
+            $totalHT = 0;
+            $totalTVA = 0;
+            $totalTTC = 0;
+            $totalQuantity = 0;
 
-        foreach($cart->get() as $id => $quantity) {
-            $cartComplete[] = [
-                'product' => $this->entityManager->getRepository(Product::class)->findOneById($id),
-                'quantity' => $quantity
-            ];
+            foreach ($cart->get() as $id => $quantity) {
+                $product = $this->entityManager->getRepository(Product::class)->findOneById($id);
+                $productPrice = $product->getPrice();
+                $totalHT += $quantity * $productPrice;
+                $totalTVA += $quantity * $productPrice * 0.2;
+                $totalTTC += $quantity * $productPrice * 1.2;
+                $totalQuantity += $quantity;
+
+                $cartComplete[] = [
+                    'product' => $product,
+                    'quantity' => $quantity
+                ];
+            }
+
+            return $this->render('cart/index.html.twig', [
+                'cart' => $cartComplete,
+                'totalHT' => $totalHT,
+                'totalTVA' => $totalTVA,
+                'totalTTC' => $totalTTC,
+                'totalQuantity' => $totalQuantity
+            ]);
         }
-        
-        
-        return $this->render('cart/index.html.twig', [
-            'cart' => $cartComplete
-        ]);
     }
 
     #[Route('/cart/add/{id}', name: 'add_to_cart')]
@@ -46,13 +62,12 @@ class CartController extends AbstractController
         return $this->redirectToRoute('cart');
     }
 
-
     #[Route('/cart/remove', name: 'remove_cart')]
     public function remove(Cart $cart): Response
     {
         $cart->remove();
 
-        return $this->redirectToRoute('app_products');
+        return $this->redirectToRoute('cart');
     }
 
     #[Route('/cart/delete/{id}', name: 'delete_to_cart')]
@@ -70,6 +85,4 @@ class CartController extends AbstractController
 
         return $this->redirectToRoute('cart');
     }
-
-    
 }

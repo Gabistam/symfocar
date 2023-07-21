@@ -32,7 +32,7 @@
                 <small>{{product.product.subtitle}}</small>
             </td>
             <td>
-              <a href="{{path('add_to_cart', { 'id' : product.product.id})}}"><img src="{{ asset('assets/images/icons/circle-minus-solid.svg') }}" alt="remove" height="15px"></a>
+              <a href="{{path('decrease_to_cart', { 'id' : product.product.id})}}"><img src="{{ asset('assets/images/icons/circle-minus-solid.svg') }}" alt="remove" height="15px"></a>
                  x {{product.quantity}}
               <a href="{{path('add_to_cart', { 'id' : product.product.id})}}"><img src="{{ asset('assets/images/icons/circle-plus-solid.svg') }}" alt="add" height="15px"></a>
             </td>
@@ -59,10 +59,10 @@
 
 <div class="total col mb-5 ">
 
-    <h5 class="row">Nombre de produits : {{ cart|length}}</h5>
-    <h5 class="row">Hors taxes : {{(total / 100)|number_format(0, ',', ' ')}} €</h5>
-    <h5 class="row">Tva : {{((total * 0.2)/100)|number_format(0, ',', ' ')}} €</h5>
-    <h3 class="row">Total : {{( (total + (total * 0.2))/100) |number_format(0, ',', ' ')}} €</h3>
+    <h5 class="row">Nombre de produits : {{ totalQuantity }}</h5>
+    <h5 class="row">Hors taxes : {{(totalHT / 100)|number_format(0, ',', ' ')}} €</h5>
+    <h5 class="row">Tva : {{(totalTVA / 100)|number_format(0, ',', ' ')}} €</h5>
+    <h3 class="row">Total : {{(totalTTC / 100)|number_format(0, ',', ' ')}} €</h3>
 
 
     <a href="{{path('app_order')}}" class="btn btn-primary current-btn">Valider mon panier</a>
