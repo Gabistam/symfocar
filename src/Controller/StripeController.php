@@ -5,7 +5,6 @@ namespace App\Controller;
 use Stripe\Stripe;
 use App\Classe\Cart;
 use App\Entity\Order;
-use App\Entity\User;
 use Stripe\Checkout\Session;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -80,7 +79,6 @@ class StripeController extends AbstractController
 
         Stripe::setApiKey($_ENV['STRIPE_SECRET_KEY']);
             
-        
 
         $checkout_session = Session::create([
 
@@ -91,9 +89,12 @@ class StripeController extends AbstractController
                 $products_for_stripe
             ],
             'mode' => 'payment',
-            'success_url' => $YOUR_DOMAIN . '/success.html',
-            'cancel_url' => $YOUR_DOMAIN . '/cancel.html',
+            'success_url' => $YOUR_DOMAIN . '/commande/merci/{CHECKOUT_SESSION_ID}',
+            'cancel_url' => $YOUR_DOMAIN . '/commande/erreur/{CHECKOUT_SESSION_ID}',
         ]);
+
+        $order->setStripeSessionId($checkout_session->id);
+        $entityManagerInterface->flush();
 
         return $this->redirect($checkout_session->url, 303);
 
