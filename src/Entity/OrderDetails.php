@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\OrderDetailsRepository;
 use Doctrine\ORM\Mapping as ORM;
+use App\Entity\Order;
 
 #[ORM\Entity(repositoryClass: OrderDetailsRepository::class)]
 class OrderDetails
@@ -84,6 +85,8 @@ class OrderDetails
 
     public function getTotal(): ?float
     {
+        
+        
         return $this->total;
     }
 
@@ -92,5 +95,10 @@ class OrderDetails
         $this->total = $total;
 
         return $this;
+    }
+
+    public function __toString(): string
+    {
+        return $this->getProduct().' x '.number_format(((($this->getQuantity() * $this->getPrice()) / 100) * 1.2), 2, ',', ' ').' €';
     }
 }

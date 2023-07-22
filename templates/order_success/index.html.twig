@@ -4,7 +4,7 @@
 
 {% block body %}
 <div class="wrapper">
-    <h1>Confirmation de ma commande</h1>
+    <h1 class="text-success" >Confirmation de ma commande</h1>
     <hr>
     <p>
         <br> Bonjour <strong>{{ order.user.firstname }} {{order.user.lastname}}</strong>,<br><br>
@@ -14,7 +14,9 @@
         <strong>Adresse de livraison :</strong><br>
         {{ order.delivery|raw }}
         <br><br> <hr><br>
-        Pour suivre votre commande, cliquez sur le lien suivant : <a href="{{ path('app_account', {'reference': order.reference}) }}">Suivre ma commande</a>
+        Pour suivre votre commande, cliquez sur le lien ci-dessous : 
+        <br> 
+        <a class="btn btn-primary current-btn" href="{{ path('app_account') }}">Suivre ma commande</a>
 
     </p>
 

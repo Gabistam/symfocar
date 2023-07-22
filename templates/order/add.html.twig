@@ -61,16 +61,16 @@
                 <div class="col-6 text-end">{{(total / 100)|number_format(2, ',', ' ')}} €</div>
 
                 <strong class="col-6">Livraison</strong>
-                <div class="col-6 text-end">{{ (carrier.price)|number_format(2, ',', ' ') }} €</div>
+                <div class="col-6 text-end">{{ (carrier.price / 100)|number_format(2, ',', ' ') }} €</div>
 
                 <strong class="col-6">Total</strong>
-                <div class="col-6 text-end">{{ ((total / 100) + carrier.price)|number_format(2, ',', ' ') }} €</div>
+                <div class="col-6 text-end">{{ ((total + carrier.price) / 100)|number_format(2, ',', ' ') }} €</div>
 
                 <strong class="col-6">TVA</strong>
-                <div class="col-6 text-end"> {{ (((total / 100) + carrier.price) * 0.2)|number_format(2, ',', ' ') }} €</div>
+                <div class="col-6 text-end"> {{(((total + carrier.price) / 100) * 0.2)|number_format(2, ',', ' ') }} €</div>
                 <hr>
                 <strong class="col-6">Total TTC</strong>
-                <div class="col-6 text-end">{{ (((total / 100) + carrier.price) * 1.2 )|number_format(2, ',', ' ') }} €</div>
+                <div class="col-6 text-end">{{ (((total + carrier.price) / 100) * 1.2 )|number_format(2, ',', ' ') }} €</div>
                 {# <strong class="col-12 mt-5">Vous avez un code promo ?</strong>
                 <div class="col-12 mb-5">
                     <form action="" method="post">
@@ -91,7 +91,7 @@
         <form action="{{path('app_stripe_create_session')}}" method="POST">
             <input type="hidden" name="reference" value="{{ reference }}">
             <button type="submit" class="btn btn-success btn-block mt-3 current-btn mb-5 px-5" width="100%" id="checkout-button">
-                <strong>Payer | {{ (((total / 100) + carrier.price) * 1.2 )|number_format(2, ',', ' ') }} €</strong>
+                <strong>Payer | {{ (((total + carrier.price) / 100) * 1.2 )|number_format(2, ',', ' ') }} €</strong>
             </button>
         </form>
     </div>

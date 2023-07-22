@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Erreur de paiement - Symfocar{% endblock %}
+
+{% block body %}
+<div class="wrapper">
+    <h1 class="text-danger" >Erreur de paiement</h1>
+    <hr>
+    <p>
+        <br> Bonjour <strong>{{ order.user.firstname }} {{order.user.lastname}}</strong>,<br><br>
+        Il semblerait que le paiement soit échoué pour votre commande n°<strong>{{ order.reference }}</strong> du <strong>{{ order.createdAt|date('d/m/Y') }}</strong> pour un montant de <strong>{{ (order.totalTTC / 100)|number_format(2, ',', ' ') }} €</strong>. <br><br>
+        
+        Une confirmation d'erreur vient de vous être envoyée par mail à l'adresse <strong>{{ order.user.email }}</strong>. <br><br> <hr> <br>
+        
+        Pour suivre votre commande, cliquez sur le lien ci-dessous :
+        <br>
+        <a class="btn btn-primary current-btn" href="{{ path('app_order') }}">Réessayer le paiement</a>
+
+    </p>
+
+
+</div>
+{% endblock %}

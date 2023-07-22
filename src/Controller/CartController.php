@@ -22,6 +22,7 @@ class CartController extends AbstractController
     public function index(Cart $cart)
     {
         if (empty($cart->get())) {
+            $this->addFlash('warning', 'Votre panier est vide.');
             return $this->redirectToRoute('app_products');
         } else {
             $cartComplete = [];
