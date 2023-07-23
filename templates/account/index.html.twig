@@ -14,9 +14,11 @@
     </p>
     <hr>
 
-    <a href="{{path('app_accountPassword')}}" class="btn btn-primary" role="button"> Modifier mon mot de passe</a>
-    <a href="{{path('app_account_adress')}}" class="btn btn-primary" role="button"> Gérer mes adresses</a>
-
+    <div class="col-12 d-flex justify-content-center g-3">
+    <a href="{{path('app_accountPassword')}}" class="btn btn-primary current-btn col-4 " role="button"> Modifier mon mot de passe</a>
+    <a href="{{path('app_account_adress')}}" class="btn btn-primary current-btn col-4 " role="button"> Gérer mes adresses</a>
+    <a href="{{path('app_account_order')}}" class="btn btn-primary current-btn col-4 " role="button"> Mes commandes</a>
+    </div>
 
 </div>
 {% endblock %}
