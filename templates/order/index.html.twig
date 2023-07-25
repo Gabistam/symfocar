@@ -7,16 +7,20 @@
 <div class="wrapper">
     <h1>Valider ma commander</h1>
     <hr>
-    <p class="mt-5 mb-5">{{app.user.firstname}}, veuillez choisir vos préférences avant de passer votre commande</p>  
+    <p class="mt-5 mb-5 text-center">{{app.user.firstname}}, veuillez choisir vos préférences avant de passer votre commande</p>  
 
     <div class="row text-center ">
         <div class="col-md-6 p-4">
-            <b>Choisir adresse et transporteur</b>
+            <b>Choisir adresse de livraison et transporteur</b>
             <hr>
+
+            {% set formhtml %}
             {{ form_start(form, {action: path('app_order_recap')}) }}
                 {{ form_label(form.addresses, 'Choisir une adresse') }}
                 <a href="{{ path('app_account_adress_add') }}" class="btn btn-primary current-btn mt-1 mb-4">+ Ajouter</a>
                 {{ form_widget(form.addresses) }}
+            {% endset %}
+            {{ formhtml|replace({'[br]': '<br/>'})|raw }}
         </div>
         <div class="col-md-6 p-4">
             <b>Récap de ma commande</b>
@@ -35,8 +39,12 @@
             </div>
         </div>
         <div class="col-md-6 p-4 submit-block">
+
+            {% set formhtml %}
             {{ form_label(form.carrier, 'Choisir un transporteur') }}
             {{ form_widget(form.carrier) }}
+            {% endset %}
+            {{ formhtml|replace({'[br]': '<br/>', '[b]': '<b>', '[/b]': '</b>'})|raw }}
         </div>
         {{ form_end(form) }}
     </div>
