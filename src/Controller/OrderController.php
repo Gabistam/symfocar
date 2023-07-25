@@ -77,7 +77,7 @@ public function add(Cart $cart, Request $request): Response
         $order->setCarrierName($carrier->getName());
         $order->setCarrierPrice($carrier->getPrice());
         $order->setDelivery($delivery_content);
-        $order->setIsPaid(0);
+        $order->setState(0);
 
         // Calculate and set totalTTC
         $totalTTC = ($order->getTotal() + $order->getCarrierPrice()) * 1.2;

@@ -29,7 +29,7 @@ class OrderSuccessController extends AbstractController
             return $this->redirectToRoute('app_home');
         }
 
-        if (!$order->isIsPaid()) {
+        if ($order->getState() == 0) {
             // Vider la session "cart"
             $cart->remove();
 
@@ -39,7 +39,7 @@ class OrderSuccessController extends AbstractController
             Vous pouvez consulter votre espace personnel pour obtenir plus de détails.<br/><br/><br/>A très bientôt sur Symfocar.<br/><br/><br/><br/><br/>L'équipe Symfocar.";
             $mail->send($order->getUser()->getEmail(), $order->getUser()->getFirstname(), 'Votre commande Symfocar est bien validée.', $content);
 
-            $order->setIsPaid(1);
+            $order->setState(1);
             $this->entityManagerInterface->flush();
         }
 
