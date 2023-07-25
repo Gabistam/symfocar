@@ -120,6 +120,10 @@ table td, table tr{
     height: 20px !important;
 }
 
+.form-check-filter{
+    padding: 0px !important;
+}
+
 .col-form-label{
     font-weight: bold;
 }

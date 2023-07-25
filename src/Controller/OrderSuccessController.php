@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Classe\Cart;
+use App\Classe\Mail;
 use App\Entity\Order;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Response;
@@ -33,9 +34,10 @@ class OrderSuccessController extends AbstractController
             $cart->remove();
 
             // Envoyer un email à notre client pour lui confirmer sa commande
-            // $mail = new Mail();
-            // $content = "Bonjour " . $order->getUser()->getFirstname() . "<br/>Merci pour votre commande.<br/><br/>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum. Quisquam, voluptatum.";
-            // $mail->send($order->getUser()->getEmail(), $order->getUser()->getFirstname(), 'Votre commande La Boutique Française est bien validée.', $content);
+            $mail = new Mail();
+            $content = "Bonjour " . $order->getUser()->getLastname() . "<br/><br/>Merci pour votre achat.<br/><br/><br/>Votre commande n° <b>". $order->getReference() . "</b> d'un montant de <b>" . number_format($order->getTotalTTC() / 100, 2, ',', ' ') . " €</b> est bien validée.<br/><br/>
+            Vous pouvez consulter votre espace personnel pour obtenir plus de détails.<br/><br/><br/>A très bientôt sur Symfocar.<br/><br/><br/><br/><br/>L'équipe Symfocar.";
+            $mail->send($order->getUser()->getEmail(), $order->getUser()->getFirstname(), 'Votre commande Symfocar est bien validée.', $content);
 
             $order->setIsPaid(1);
             $this->entityManagerInterface->flush();

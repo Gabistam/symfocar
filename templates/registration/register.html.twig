@@ -6,11 +6,17 @@
 
 
 <div class="wrapper">
-    {% for flash_error in app.flashes('verify_email_error') %}
-        <div class="alert alert-danger" role="alert">{{ flash_error }}</div>
-    {% endfor %}
-
+    
     <h1>Inscription</h1>
+
+    {% if notification %}
+    
+        <div class="alert alert-info">
+            {{ notification }}
+        </div>
+        <hr>
+    {% endif %}
+    
 
     {{ form_start(registrationForm) }}
         {{ form_row(registrationForm.email) }}
