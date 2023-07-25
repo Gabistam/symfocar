@@ -5,7 +5,7 @@
 {% block body %}
 
 
-<div class="wrapper">
+<div transition-style="in:circle:hesitate" class="wrapper">
     <h1>{{ product.name }}</h1>
 
 
@@ -18,7 +18,7 @@
                 <a href="{{ path('add_to_cart', {'id':product.id} )}}" >
                     <a href="{{path('add_to_cart', { 'id' : product.id})}}"><img src="{{ asset('assets/images/icons/cart-plus-solid-blue.svg') }}" alt="add" height="50px" ></a>
                 </a>
-                <a href="{{ path('app_cart')}}" class="btn btn-success">Aller au panier</a>
+                <a href="{{ path('app_cart')}}" class="btn btn-success current-btn">Aller au panier</a>
             </div>
 
             <h2>{{ product.subtitle }}</h2>
@@ -35,12 +35,12 @@
                     <p class="card-text fs-6 text-justify">
                         {{ product.description }}
                     </p>
-                    <a href="{{ path('add_to_cart', {'id':product.id} )}}" class="btn btn-primary mb-4">Commander</a>
+                    <a href="{{ path('add_to_cart', {'id':product.id} )}}" class="btn btn-primary mb-4 current-btn">Commander</a>
                 </div>
             </div>
         </div>
     </div>
-    <a class="btn btn-primary" href="{{path('app_products')}}">Liste des voitures</a>
+    <a class="btn btn-primary current-btn" href="{{path('app_products')}}">Liste des voitures</a>
 
 </div>
 
