@@ -1,0 +1,10 @@
+<div class="card mb-2 mt-2 product-card">
+    <div class="card-body">
+        <h5 class="card-title">{{product.name}}</h5>
+        <a href="{{path('app_product_show', {'slug' : product.slug})}}"><img src="assets/images/uploads/{{ product.illustration}}" alt="{{product.name}}" class="img-fluid card-image"></a>
+        <span>Energie: {{product.energy}}</span> <br>
+        <span>Carrosserie: {{product.category}}</span> <br>
+        <span>{{(product.price /100)|number_format(0,',', ' ')}} €</span> <br>
+        <a href="{{path('app_product_show', {'slug' : product.slug})}}" class="btn btn-primary current-btn">Voir la voiture</a>
+    </div>
+</div>

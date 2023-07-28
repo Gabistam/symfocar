@@ -21,35 +21,40 @@ class CartController extends AbstractController
     #[Route('/cart', name: 'app_cart')]
     public function index(Cart $cart)
     {
-        
+
         $cartComplete = [];
         $totalHT = 0;
         $totalTVA = 0;
         $totalTTC = 0;
         $totalQuantity = 0;
 
-        foreach ($cart->get() as $id => $quantity) {
-            $product = $this->entityManager->getRepository(Product::class)->findOneById($id);
-            $productPrice = $product->getPrice();
-            $totalHT += $quantity * $productPrice;
-            $totalTVA += $quantity * $productPrice * 0.2;
-            $totalTTC += $quantity * $productPrice * 1.2;
-            $totalQuantity += $quantity;
+        if ($cart ->get() == null) {
+            return $this->render('cart/index.html.twig', [
+                'cart' => $cartComplete              
+            ]);
+        } else {
+            foreach ($cart->get() as $id => $quantity) {
+                $product = $this->entityManager->getRepository(Product::class)->findOneById($id);
+                $productPrice = $product->getPrice();
+                $totalHT += $quantity * $productPrice;
+                $totalTVA += $quantity * $productPrice * 0.2;
+                $totalTTC += $quantity * $productPrice * 1.2;
+                $totalQuantity += $quantity;
 
-            $cartComplete[] = [
-                'product' => $product,
-                'quantity' => $quantity
-            ];
+                $cartComplete[] = [
+                    'product' => $product,
+                    'quantity' => $quantity
+                ];
+            }
+
+            return $this->render('cart/index.html.twig', [
+                'cart' => $cartComplete,
+                'totalHT' => $totalHT,
+                'totalTVA' => $totalTVA,
+                'totalTTC' => $totalTTC,
+                'totalQuantity' => $totalQuantity
+            ]);
         }
-
-        return $this->render('cart/index.html.twig', [
-            'cart' => $cartComplete,
-            'totalHT' => $totalHT,
-            'totalTVA' => $totalTVA,
-            'totalTTC' => $totalTTC,
-            'totalQuantity' => $totalQuantity
-        ]);
-        
     }
 
     #[Route('/cart/add/{id}', name: 'add_to_cart')]

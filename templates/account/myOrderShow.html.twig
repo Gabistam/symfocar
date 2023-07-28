@@ -5,10 +5,26 @@
 {% block body %}
 
 
-    <div class="wrapper">
+    <div class="wrapper order">
         <h1>Ma commande</h1>
         <a href="{{ path('app_account_order')}}" class="btn btn-primary current-btn mb-4" >Retour</a>
         <hr>
+        <strong>Statut de la commande :</strong>
+        {% if order.state == 0 %}
+            <span class="badge bg-warning text-dark">En attente de paiement</span>
+        {% elseif order.state == 1 %}
+            <span class="badge bg-info text-dark">Paiement effectué</span>
+        {% elseif order.state == 2 %}
+            <span class="badge bg-primary text-dark">Préparation en cours</span>
+        {% elseif order.state == 3 %}
+            <span class="badge bg-primary text-dark">Livraison en cours</span>
+        {% elseif order.state == 4 %}
+            <span class="badge bg-success text-dark">Commande livrée</span>
+        {% elseif order.state == 5 %}
+            <span class="badge bg-danger text-dark">Commande annulée</span>
+
+        {% endif %}
+        <br>
 
         <strong>Commande passé le :</strong> {{ order.createdAt | date('d/m/Y à H:i') }} <br>
         <strong>Numéro de commande :</strong> {{ order.reference }} <br>

@@ -5,10 +5,10 @@
 {% block body %}
 
 
-    <div class="wrapper">
+    <div class="wrapper order">
         <h1>Mes commandes</h1>
         </hr>
-        <h4 class="text-center">{{app.user.firstname}}, c'est dans cet espace que vous allez pouvoir gérer toutes vos commandes</h4>
+        <h5 class="text-center">{{app.user.firstname}}, c'est dans cet espace que vous allez pouvoir gérer toutes vos commandes</h5>
 
         </p>
 
@@ -24,6 +24,7 @@
                     <thead>
                     <tr>
                         <th scope="col">reférences</th>
+                        <th scope="col">statut</th>
                         <th scope="col">Passé</th>
                         <th scope="col">Produits</th>
                         <th scope="col">Total</th>
@@ -34,6 +35,22 @@
                     {% for order in orders %}
                         <tr>
                             <td><span class="badge rounded-pill bg-secondary">{{order.reference}}</span> </td>
+                            <td>
+                                {% if order.state == 0 %}
+                                    <span class="badge rounded-pill bg-secondary">Paiement en attente</span>
+                                {% elseif order.state == 1 %}
+                                    <span class="badge rounded-pill bg-success text-dark">Payée</span>
+                                {% elseif order.state == 2 %}
+                                    <span class="badge rounded-pill bg-primary">Préparation en cours</span>
+                                {% elseif order.state == 3 %}
+                                    <span class="badge rounded-pill bg-primary">Livraison en cours</span>
+                                {% elseif order.state == 4 %}
+                                    <span class="badge rounded-pill bg-success">Livrée</span>
+                                {% elseif order.state == 5 %}
+                                    <span class="badge rounded-pill bg-danger">Annulée</span>
+                                {% endif %}
+                                
+                            </td>
                             <td>{{order.createdAt|date('d/m/Y')}}</td>
                             <td>{{order.orderDetails|length}}</td>
                             <td>{{(order.totalTTC / 100)|number_format(2, ',', ' ')}} €</td>

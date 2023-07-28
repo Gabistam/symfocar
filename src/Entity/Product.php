@@ -47,6 +47,9 @@ class Product
     #[ORM\Column(length: 255)]
     private ?string $couleur = null;
 
+    #[ORM\Column]
+    private ?bool $isBest = null;
+
 
     public function getId(): ?int
     {
@@ -171,6 +174,18 @@ class Product
     public function setCouleur(string $couleur): self
     {
         $this->couleur = $couleur;
+
+        return $this;
+    }
+
+    public function isIsBest(): ?bool
+    {
+        return $this->isBest;
+    }
+
+    public function setIsBest(bool $isBest): self
+    {
+        $this->isBest = $isBest;
 
         return $this;
     }
