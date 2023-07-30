@@ -2,10 +2,47 @@
 
 {% block title %}Home - Symfocar{% endblock %}
 
+
+
 {% block body %}
 
 
+ 
+
+
+  <div id="myCarousel" class="carousel slide mb-12" data-ride="carousel">
+    <ol class="carousel-indicators">
+        {% for key, header in headers %}
+        <li data-target="#myCarousel" data-slide-to="{{ key }}" {% if key == 0 %}class="active"{% endif %}></li>
+        {% endfor %}
+    </ol>
+    <div class="carousel-inner">
+        {% for key, header in headers %}
+        <div class="carousel-item {% if key == 0 %}active{% endif %}" >
+            <div class="container">
+                <div class="carousel-caption text-left">
+                    <h1>{{ header.title }}</h1>
+                    <p>{{ header.content }}</p>
+                    <p><a class="btn btn-lg btn-primary" href="{{ header.url }}" role="button">{{header.cta}}</a></p>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    <a class="carousel-control-prev" href="#myCarousel" role="button" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"><i class="fa-solid fa-angle-left"></i></span>
+        <span class="visually-hidden">Previous</span>
+    </a>
+    <a class="carousel-control-next" href="#myCarousel" role="button" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"><i class="fa-solid fa-angle-right"></i></span>
+        <span class="visually-hidden">Next</span>
+    </a>
+  </div>
+
+
   <div class="wrapper">
+
+
   <h3>Nos meilleurs ventes</h3>
   <p>Découvrez les derniers véhicules en vogue</p>
     <div class="row">
