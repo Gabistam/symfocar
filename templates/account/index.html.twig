@@ -14,10 +14,17 @@
     </p>
     <hr>
 
-    <div class="col-12 d-flex justify-content-center g-3">
-    <a href="{{path('app_accountPassword')}}" class="btn btn-primary current-btn col-4 " role="button"> Modifier mon mot de passe</a>
-    <a href="{{path('app_account_adress')}}" class="btn btn-primary current-btn col-4 " role="button"> Gérer mes adresses</a>
-    <a href="{{path('app_account_order')}}" class="btn btn-primary current-btn col-4 " role="button"> Mes commandes</a>
+    <div class="row g-2 col-12">
+        <div class="col col-4">
+            <a href="{{path('app_accountPassword')}}" class="btn btn-primary current-btn col-10 " role="button"> Modifier mon mot de passe</a>
+        </div>
+        <div class="col col-4">
+            <a href="{{path('app_account_adress')}}" class="btn btn-primary current-btn col-10 " role="button"> Gérer mes adresses</a>
+        </div>
+        <div class="col col-4">
+            <a href="{{path('app_account_order')}}" class="btn btn-primary current-btn col-10 " role="button"> Mes commandes</a>
+        </div>
+
     </div>
 
 </div>

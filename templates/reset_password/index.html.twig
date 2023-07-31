@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mot de passe oublié - Symfocar{% endblock %}
+
+{% block body %}
+
+<div class="wrapper login-logout">
+    <form method="post">
+        
+
+        <h1 class="h2 mb-5" >Réinitialiser mon mot de passe</h1>
+        <input type="email" name="email" id="inputEmail" placeholder="Saisissez votre email" class="form-control mb-5" autocomplete="email" required autofocus>
+
+
+        <button class="btn btn-lg btn-primary col-12 current-btn mb-3" type="submit">
+            Valider
+        </button>
+        <hr>
+        <p class="text-center">Ou souhaitez-vous <a href="{{ path('app_login') }}">vous connecter</a> ?</p>
+    </form>
+</div>
+{% endblock %}
