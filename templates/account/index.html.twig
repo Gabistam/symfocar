@@ -6,7 +6,7 @@
 
 
 <div class="wrapper">
-   <h1>Mon Compte</h1>
+   <h1>Mon Compte {% if is_granted("ROLE_ADMIN") %}Admin{% endif %}</h1>
     <hr>
     <h4>Bonjour {{app.user.firstname}},</h4>  
 
@@ -15,13 +15,21 @@
     <hr>
 
     <div class="row g-2 col-12">
-        <div class="col col-4">
+
+    {% if is_granted("ROLE_ADMIN") %}
+        <div class=" col-3 ">
+            <a href="{{path('app_admin')}}" class="btn btn-primary current-btn col-10 " role="button"> Accéder à l'admin</a>
+        </div>
+
+    {% endif %}
+    
+        <div class="{% if is_granted("ROLE_ADMIN") %} col-3 {% else %} col-4 {% endif %}">
             <a href="{{path('app_accountPassword')}}" class="btn btn-primary current-btn col-10 " role="button"> Modifier mon mot de passe</a>
         </div>
-        <div class="col col-4">
+        <div class="{% if is_granted("ROLE_ADMIN") %} col-3 {% else %} col-4 {% endif %}">
             <a href="{{path('app_account_adress')}}" class="btn btn-primary current-btn col-10 " role="button"> Gérer mes adresses</a>
         </div>
-        <div class="col col-4">
+        <div class="{% if is_granted("ROLE_ADMIN") %} col-3 {% else %} col-4 {% endif %}">
             <a href="{{path('app_account_order')}}" class="btn btn-primary current-btn col-10 " role="button"> Mes commandes</a>
         </div>
 
