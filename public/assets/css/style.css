@@ -4,8 +4,7 @@ body {
 
 .wrapper { 
     background: #ffffff !important;
-    margin: 1em auto; 
-    margin-bottom: 4em;
+    margin: 4em auto; 
     max-width: 78em; 
     width: 95%; 
     font: 18px/1.5 sans-serif;
@@ -24,6 +23,8 @@ body {
 }
 .wrapper-products {
     max-width: 65em !important; 
+    margin: 4em auto; 
+
 }
 
 .login-logout{
@@ -37,7 +38,7 @@ body {
 h1 { font-weight: bold; 
 text-align: center; 
 margin-bottom: 1em}
-.wrapper a { margin-top: 3em}
+.wrapper a { margin-top: 4em}
 .card-image {
     width: 100%;
     height: 120px;
@@ -159,6 +160,18 @@ table td, table tr{
     transition: 0.5s;
 }
 
+.carousel-item{
+    height: 400px;
+   
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.featurette img {
+    border-radius: 25px;
+}
+
 @keyframes wipe-cinematic-in {
   0% {
     clip-path: inset(100% 0 100% 0);
@@ -175,19 +188,6 @@ table td, table tr{
    animation-name: wipe-cinematic-in;
 }
 
-.carousel {
-  position: relative;
-  width: 100%;
-  height: 200px;
-  overflow: hidden;
-  padding: 0;
-  margin: 0;
-  background: #fff;
-  color: #fff;
-  text-align: center;
-  font-size: 16px;
-  line-height: 1.2;
-  font-family: sans-serif;
-  
-}
+
+
 

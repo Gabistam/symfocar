@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Error 404 - Symfocar{% endblock %}
+
+{% block body %}
+
+<div class="wrapper login-logout">
+    <h1 class="h2 mb-5" >Error 404</h1>
+    <p class="text-center">La page que vous cherchez n'existe pas.</p><br><br>
+    {% if is_granted('ROLE_ADMIN') %}
+        <a href="{{ path('app_admin') }}" class="btn btn-primary col-12 current-btn">Retour à l'administration</a> 
+    {% else %}
+        <a href="{{ path('app_home') }}" class="btn btn-primary col-12 current-btn">Retour à l'accueil</a>
+    {% endif %}
+
+
+</div>
+{% endblock %}

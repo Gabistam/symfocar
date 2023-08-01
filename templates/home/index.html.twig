@@ -6,6 +6,50 @@
 
 {% block body %}
 
+<div id="myCarousel" class="carousel slide mb-6 mt-0" data-bs-ride="carousel">
+    <div class="carousel-indicators">
+      <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+      <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
+      <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
+    </div>
+    <div class="carousel-inner">
+      <div class="carousel-item active" style="background-image:url('{{ asset('assets/images/divers/header.jpeg')}}');">
+        <div class="container">
+          <div class="carousel-caption text-start">
+            <h1>New Audi</h1>
+            <p class="opacity-75">Découvrez notre nouvelle gamme de Audi</p>
+            <p><a class="btn btn-lg btn-light rounded-pill" href="http://127.0.0.1:8000/product/audu-q7">Découvrir</a></p>
+          </div>
+        </div>
+      </div>
+      <div class="carousel-item" style="background-image:url('{{ asset('assets/images/divers/header5.jpg')}}');">
+        <div class="container">
+          <div class="carousel-caption">
+            <h1>New Renault</h1>
+            <p>Découvrez notre nouvelle gamme de Renault</p>
+            <p><a class="btn btn-lg btn-light rounded-pill" href="http://127.0.0.1:8000/product/megane-e-tech">Découvrir</a></p>
+          </div>
+        </div>
+      </div>
+      <div class="carousel-item" style="background-image:url('{{ asset('assets/images/divers/header4.jpg')}}');">
+        <div class="container">
+          <div class="carousel-caption text-end">
+            <h1>New Peugeot</h1>
+            <p>Venez découvrir nos nouvelles Peugeot</p>
+            <p><a class="btn btn-lg btn-light rounded-pill" href="http://127.0.0.1:8000/product/peugeot-208">Découvrir</a></p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#myCarousel" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#myCarousel" data-bs-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </button>
+  </div>
 
   {# <div id="myCarousel" class="carousel slide mb-12" data-ride="carousel">
     <ol class="carousel-indicators">
@@ -20,7 +64,7 @@
                 <div class="carousel-caption text-left">
                     <h1>{{ header.title }}</h1>
                     <p>{{ header.content }}</p>
-                    <p><a class="btn btn-lg btn-primary" href="{{ header.url }}" role="button">{{header.cta}}</a></p>
+                    <p><a class="btn btn-lg btn-light rounded-pill" href="{{ header.url }}" role="button">{{header.cta}}</a></p>
                 </div>
             </div>
         </div>
@@ -37,58 +81,65 @@
   </div> #}
 
 
+
   <div class="wrapper">
 
 
-  <h3>Nos meilleurs ventes</h3>
-  <p>Découvrez les derniers véhicules en vogue</p>
-    <div class="row">
-      {% for product in products %}
-        <div class="col-md-3">
-          {% include "product/single_product.html.twig" %}
-        </div>
-        
-      {% endfor %}
-    </div>
+    <h3>Nos meilleurs ventes</h3>
+    <p>Découvrez les derniers véhicules en vogue</p>
+      <div class="row my-5">
+        {% for product in products %}
+          <div class="col-md-3">
+            {% include "product/single_product.html.twig" %}
+          </div>
+          
+        {% endfor %}
+      </div>
 
-    <div class="container marketing mt-5">
+      
 
-      <!-- Three columns of text below the carousel -->
-      <div class="row">
-        <div class="col-lg-4">
-          <svg class="bd-placeholder-img rounded-circle" width="140" height="140" xmlns="http://www.w3.org/2000/svg"
-            role="img" aria-label="Placeholder" preserveAspectRatio="xMidYMid slice" focusable="false">
-            <title>Placeholder</title>
-            <rect width="100%" height="100%" fill="var(--bs-secondary-color)" />
-          </svg>
-          <h2 class="fw-normal">Heading</h2>
-          <p>Some representative placeholder content for the three columns of text below the carousel. This is the first
-            column.</p>
-          <p><a class="btn btn-secondary current-btn" href="#">View details &raquo;</a></p>
-        </div><!-- /.col-lg-4 -->
-        <div class="col-lg-4">
-          <svg class="bd-placeholder-img rounded-circle" width="140" height="140" xmlns="http://www.w3.org/2000/svg"
-            role="img" aria-label="Placeholder" preserveAspectRatio="xMidYMid slice" focusable="false">
-            <title>Placeholder</title>
-            <rect width="100%" height="100%" fill="var(--bs-secondary-color)" />
-          </svg>
-          <h2 class="fw-normal">Heading</h2>
-          <p>Another exciting bit of representative placeholder content. This time, we've moved on to the second column.
-          </p>
-          <p><a class="btn btn-secondary current-btn" href="#">View details &raquo;</a></p>
-        </div><!-- /.col-lg-4 -->
-        <div class="col-lg-4">
-          <svg class="bd-placeholder-img rounded-circle" width="140" height="140" xmlns="http://www.w3.org/2000/svg"
-            role="img" aria-label="Placeholder" preserveAspectRatio="xMidYMid slice" focusable="false">
-            <title>Placeholder</title>
-            <rect width="100%" height="100%" fill="var(--bs-secondary-color)" />
-          </svg>
-          <h2 class="fw-normal">Heading</h2>
-          <p>And lastly this, the third column of representative placeholder content.</p>
-          <p><a class="btn btn-secondary current-btn" href="#">View details &raquo;</a></p>
-        </div><!-- /.col-lg-4 -->
+     <!-- START THE FEATURETTES -->
+
+
+    <div class="row featurette d-flex align-items-center py-5 my-5">
+      <div class="col-md-6 ">
+          <h2 class="featurette-heading fs-1">Vente de véhicules <br> <span class="text-body-secondary fs-2">Une expérience révolutionnaire</span></h2>
+          <p class="fs-5 mt-4">Avec une vaste sélection de véhicules de qualité, une interface intuitive et un service client de premier ordre, l'achat de votre nouvelle voiture n'a jamais été aussi simple et agréable.</p>
+      </div>
+
+      <div class="col-md-5">
+        <img src="{{ asset('assets/images/divers/achat_car.jpg') }}" class="img-fluid" alt="achat de voiture">
       </div>
     </div>
+
+
+    <div class="row featurette d-flex align-items-center py-5 my-5">
+      <div class="col-md-7 order-md-2">
+        <h2 class="featurette-heading fs-1">Location simplifiée <br> <span class="text-body-secondary fs-2">Pure flexibilité</span></h2>
+        <p class="fs-5 mt-4">Notre service de location offre une solution de mobilité flexible. Que vous ayez besoin d'une voiture pour un jour, une semaine ou un mois, nous nous adaptons à vos besoins avec notre large gamme de véhicules de qualité.</p>
+    </div>
+
+      <div class="col-md-5 order-md-1">
+        <img src="{{ asset('assets/images/divers/location_car.jpg') }}" class="img-fluid" alt="achat de voiture">
+      </div>
+    </div>
+
+
+    <div class="row featurette d-flex align-items-center py-5 my-5">
+      <div class="col-md-7">
+    <h2 class="featurette-heading fs-1">Réparations de confiance <br> <span class="text-body-secondary fs-2">Votre tranquillité d'esprit</span></h2>
+    <p class="fs-5 mt-4">Notre équipe de techniciens qualifiés est prête à résoudre tous vos problèmes de véhicules. Avec un diagnostic précis et une réparation rapide, nous vous remettons sur la route en toute sécurité.</p>
+</div>
+
+      <div class="col-md-5">
+        <img src="{{ asset('assets/images/divers/reparation_car.jpg') }}" class="img-fluid" alt="achat de voiture">
+      </div>
+    </div>
+
+
+    <!-- /END THE FEATURETTES -->
+
+
   </div>
 
 {% endblock %}
