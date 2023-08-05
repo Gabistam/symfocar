@@ -16,7 +16,7 @@
         <a href="{{path('app_account')}}" class="btn btn-primary current-btn" role="button">Retour</a>
 
         </hr>
-        <h3>Vue de mes adresses</h3> <br>
+        <h3 class="mt-4">Vue de mes adresses</h3> <br>
         <div class="container">
             {% if app.user.adresses|length == 0 %}
                 <p class="text-center">
@@ -28,7 +28,7 @@
                         {% for adress in app.user.adresses %}
                             <div class="col-4">
                                 <div class="card">
-                                    <div class="card-body">
+                                    <div class="card-body py-5">
                                         <h5 class="card-title">{{adress.name}}</h5>
                                         <p class="card-text">
                                             {{adress.firstname}} {{adress.lastname}} <br>
