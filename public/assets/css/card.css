@@ -1,0 +1,40 @@
+.card_style{
+    border-radius: 50px;
+    bottom: 0px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(115deg, #ebf5fc, #0d72ba);
+}
+
+.card_style:hover{
+    transform: translateY(5px);
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+    transition: 0.5s;
+    background: linear-gradient(115deg, #ebf5fc, #02406c);
+}
+
+.card_style a{
+    font-size: 2em;
+    color: rgba(77, 31, 119, 0.100);
+    margin: 10px !important;
+}
+
+.card_style:hover a{
+    transition: 0.5s;
+    font-size: 2.5em;
+    color: rgba(77, 31, 119, 0.300);
+}
+
+.card_style {
+    color: #222121;
+    font-family: "Poppins", sans-serif;
+    font-weight: 300;
+
+}
+
+.btn_group{
+    display: flex;
+    justify-content: space-evenly;
+}

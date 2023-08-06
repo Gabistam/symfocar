@@ -27,8 +27,8 @@
                     <div class="row g-2">
                         {% for adress in app.user.adresses %}
                             <div class="col-4">
-                                <div class="card">
-                                    <div class="card-body py-5">
+                                <div class="card card_style">
+                                    <div class="card-body text-center py-5">
                                         <h5 class="card-title">{{adress.name}}</h5>
                                         <p class="card-text">
                                             {{adress.firstname}} {{adress.lastname}} <br>
@@ -36,10 +36,14 @@
                                             {{adress.cp}} {{adress.ville}} <br>
                                             {{adress.pays}}
                                         </p>
+
+                                        <div class="btn_group">
                                         <a href="{{path('app_account_adress_edit', {'id': adress.id})}}"
-                                            class="btn btn-primary">Modifier</a> <a
+                                            ><i class="fa-regular fa-pen-to-square" style="color: #f2a218;"></i></a> 
+                                            <a
                                             href="{{path('app_account_adress_delete', {'id' : adress.id})}}"
-                                            class="btn btn-danger">Supprimer</a>
+                                            ><i class="fa-regular fa-trash-can" style="color: #e62832;"></i></a>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
