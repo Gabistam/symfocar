@@ -66,6 +66,27 @@ class ProductRepository extends ServiceEntityRepository
         return $query->getQuery()->getResult();
     }
 
+    // src/Repository/ProductRepository.php
+
+public function findRentableProducts()
+{
+    return $this->createQueryBuilder('p')
+        ->where('p.isDispo = :isDispo')
+        ->setParameter('isDispo', true)
+        ->getQuery()
+        ->getResult();
+}
+
+public function findBestProducts()
+{
+    return $this->createQueryBuilder('p')
+        ->where('p.isBest = :isBest')
+        ->setParameter('isBest', true)
+        ->getQuery()
+        ->getResult();
+}
+
+
 
 
 

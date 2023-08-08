@@ -22,7 +22,11 @@ class HomeController extends AbstractController
     public function index(): Response
     {
 
-        $products = $this->entityManagerInterface->getRepository(Product::class)->findByIsBest(1);
+        // $products = $this->entityManagerInterface->getRepository(Product::class)->findByIsBest(1);
+
+        $products = $this->entityManagerInterface->getRepository(Product::class)->findBestProducts(1);
+
+
         $headers = $this->entityManagerInterface->getRepository(Header::class)->findAll();
         
         return $this->render('home/index.html.twig', [
