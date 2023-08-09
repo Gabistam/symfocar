@@ -10,6 +10,8 @@ use App\Entity\Product;
 use App\Entity\Category;
 use App\Controller\Admin\OrderCrudController;
 use App\Entity\Header;
+use App\Entity\RentCar;
+use App\Entity\RentCategory;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
@@ -42,7 +44,9 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToCrud('Products', 'fas fa-car', Product::class);
         yield MenuItem::linkToCrud('Orders', 'fa-solid fa-bag-shopping', Order::class);
         yield MenuItem::linkToCrud('Transporteurs', 'fa-solid fa-truck-fast', Carrier::class);
-        yield MenuItem::linkToCrud('header', 'fa-solid fa-tv', Header::class);
+        yield MenuItem::linkToCrud('Header', 'fa-solid fa-tv', Header::class);
+        yield MenuItem::linkToCrud('Location', 'fa-solid fa-car-on', RentCar::class);
+        yield MenuItem::linkToCrud('Location-Gamme', 'fa-solid fa-layer-group', RentCategory::class);
     } 
 }
 
