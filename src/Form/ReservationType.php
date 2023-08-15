@@ -28,6 +28,7 @@ class ReservationType extends AbstractType
                 'expanded' => true, // Les choix sont rendus en tant que boutons radio
                 'label' => 'Choisissez une voiture',
             ])
+            
             ->add('startDate', HiddenType::class)  // champ caché pour la date de début
             ->add('endDate', HiddenType::class)    // champ caché pour la date de fin
         ;

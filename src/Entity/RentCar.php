@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Repository\RentCarRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: RentCarRepository::class)]
 class RentCar
@@ -12,27 +13,35 @@ class RentCar
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups(["reservation:read"])]
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups(["reservation:read"])]
     private ?string $name = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups(["reservation:read"])]
     private ?string $slug = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups(["reservation:read"])]
     private ?string $illustration = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups(["reservation:read"])]
     private ?string $subtitle = null;
 
     #[ORM\Column(type: Types::TEXT)]
+    #[Groups(["reservation:read"])]
     private ?string $description = null;
 
     #[ORM\Column]
+    #[Groups(["reservation:read"])]
     private ?float $price = null;
 
     #[ORM\Column]
+    #[Groups(["reservation:read"])]
     private ?bool $isDispo = null;
 
     #[ORM\ManyToOne(inversedBy: 'rentCar')]

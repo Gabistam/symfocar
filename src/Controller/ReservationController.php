@@ -13,28 +13,36 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class ReservationController extends AbstractController
 {
-    #[Route('/reservation', name: 'app_reservation')]
+    #[Route('/api/reservation', name: 'api_reservation', methods: ['GET', 'POST'])]
     public function index(Request $request, EntityManagerInterface $entityManager, RentCarRepository $rentCarRepository): Response
     {
-        $availableCars = $rentCarRepository->findBy(['isDispo' => true]);
-
-        $reservation = new Reservation();
-        $form = $this->createForm(ReservationType::class, $reservation);
-
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager->persist($reservation);
-            $entityManager->flush();
-
-            // Ajouter une redirection après la soumission réussie du formulaire
-            // par exemple vers une page de remerciement ou la liste des réservations.
-            return $this->redirectToRoute('app_account');
+        if ($request->isMethod('GET')) {
+            $availableCars = $rentCarRepository->findBy(['isDispo' => true]);
+            return $this->json(['availableCars' => $availableCars]);
         }
 
-        return $this->render('reservation/index.html.twig', [
-            'form' => $form->createView(),
-            'availableCars' => $availableCars
-        ]);
+        if ($request->isMethod('POST')) {
+            $data = json_decode($request->getContent(), true);
+            $reservation = new Reservation();
+            
+            $form = $this->createForm(ReservationType::class, $reservation);
+            $form->submit($data);
+
+            if ($form->isValid()) {
+                $entityManager->persist($reservation);
+                $entityManager->flush();
+                return $this->json(['message' => 'Reservation successful!', 'reservationId' => $reservation->getId()], Response::HTTP_CREATED);
+            } else {
+                $errors = [];
+                foreach ($form as $fieldName => $formField) {
+                    foreach ($formField->getErrors(true) as $error) {
+                        $errors[$fieldName][] = $error->getMessage();
+                    }
+                }
+                return $this->json(['errors' => $errors], Response::HTTP_BAD_REQUEST);
+            }
+        }
+
+        return $this->json(['message' => 'Method not allowed'], Response::HTTP_METHOD_NOT_ALLOWED);
     }
 }

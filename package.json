@@ -40,6 +40,7 @@
   },
   "dependencies": {
     "@mobiscroll/react": "https://npm.mobiscroll.com/@mobiscroll/react-trial/-/react-trial-5.26.1.tgz",
+    "axios": "^1.4.0",
     "core-js": "^3.32.0"
   }
 }

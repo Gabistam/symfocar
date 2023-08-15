@@ -28,12 +28,13 @@
   left: 0.3em;
   right: 0.3em;
   bottom: 2em;
-  background: #ebf5fc;
+  background: #1f1f20;
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
   border-radius: 50px;
   display: flex;
   justify-content: center;
   align-items: center;
+  color: #fff;
 }
 
 .container .card:hover .box{

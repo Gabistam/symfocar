@@ -7,47 +7,26 @@
 <div class="wrapper">
     <h1>Réservation</h1>
 
-   <hr>
-{# Afficher les erreurs de validation du formulaire #}
-    {% if form.vars.errors %}
-        <div class="alert alert-danger">
-            {{ form_errors(form) }}
-        </div>
-    {% endif %}
-
     <hr>
-
-    {# Afficher le formulaire de réservation #}
-    {{ form_start(form) }}
-
+    
+    {# Composant React pour la sélection de la date et la soumission du formulaire #}
+    <div id="car-reservation"></div>
+    
     {# Sélection du produit #}
     <div>
-        {{ form_label(form.rentCar) }}
-
         {# Boucle pour afficher uniquement les voitures disponibles #}
-        {% for car in form.rentCar.vars.choices %}
-            {% if car.data.isDispo %}
+        {% for car in availableCars %}
+            {% if car.isDispo %}
                 <div class="card">
                     <div class="col-6">
-                        {{ form_widget(form.rentCar[car.value]) }} {{ car.label }} <br> {{ car.data.price }} € <br> {{ car.data.rentCategory }} <br> 
-                        <img src="{{ asset('assets/images/uploads/rent/' ~ car.data.illustration) }}" alt="{{ car.data.name }}" class="img-fluid">
+                        {{ car.name }} <br> {{ car.price }} € <br> {{ car.rentCategory }} <br> 
+                        <img src="{{ asset('assets/images/uploads/rent/' ~ car.illustration) }}" alt="{{ car.name }}" class="img-fluid">
                     </div> 
                 </div>
             {% endif %}
         {% endfor %}
-
-        {{ form_errors(form.rentCar) }}
     </div>
 
-    {# Composant React pour la sélection de la date #}
-    <div id="car-reservation"></div>
-
-    {# Champs cachés pour les dates de début et de fin #}
-    {{ form_widget(form.startDate) }}
-    {{ form_widget(form.endDate) }}
-
-    <button type="submit" class="btn btn-primary mt-3">Réserver</button>
-    {{ form_end(form) }}
 </div>
 
 {{ encore_entry_script_tags('app') }}
