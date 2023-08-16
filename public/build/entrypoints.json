@@ -1,0 +1,14 @@
+{
+  "entrypoints": {
+    "app": {
+      "js": [
+        "/build/runtime.js",
+        "/build/vendors-node_modules_mobiscroll_react_dist_js_mobiscroll_react_min_js-node_modules_core-js_mo-25a4aa.js",
+        "/build/app.js"
+      ],
+      "css": [
+        "/build/vendors-node_modules_mobiscroll_react_dist_js_mobiscroll_react_min_js-node_modules_core-js_mo-25a4aa.css"
+      ]
+    }
+  }
+}
