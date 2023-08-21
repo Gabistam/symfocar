@@ -1,0 +1,9 @@
+name: Symfony CI/CD
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
