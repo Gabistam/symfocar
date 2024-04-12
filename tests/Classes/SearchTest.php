@@ -12,7 +12,6 @@ class SearchTest extends TestCase {
 
         $this->assertEquals('', $search->string);
         $this->assertEmpty($search->categories);
-        $this->assertEmpty($search->energy);
     }
 
     public function testSettingValues() {
@@ -20,10 +19,8 @@ class SearchTest extends TestCase {
 
         $search->string = 'testString';
         $search->categories = [new Category(), new Category()];
-        $search->energy = ['energy1', 'energy2'];
 
         $this->assertEquals('testString', $search->string);
         $this->assertCount(2, $search->categories);
-        $this->assertEquals(['energy1', 'energy2'], $search->energy);
     }
 }

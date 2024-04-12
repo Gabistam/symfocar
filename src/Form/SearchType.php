@@ -39,18 +39,6 @@ class SearchType extends AbstractType
                 'expanded' => true
 
             ])
-            ->add('energy', ChoiceType::class, [
-                'label' => false,
-                'required' => false,
-                'choices' => [
-                    'Diesel' => 'Diesel',
-                    'Essence' => 'Essence',
-                    'Electrique' => 'Electrique',
-                    'Hybride' => 'Hybride',
-                ],
-                'multiple' => true,
-                'expanded' => true,
-            ])
 
             ->add('submit', SubmitType::class, [
                 'label' => 'Filtrer',

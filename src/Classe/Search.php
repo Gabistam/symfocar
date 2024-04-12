@@ -16,8 +16,5 @@ class Search
      */
     public $categories = [];
 
-    /**
-     * @var string
-     */
-    public $energy = [];
+
 }
