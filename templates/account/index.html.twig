@@ -14,36 +14,17 @@
     </p>
     <hr>
 
-    {# <div class="row g-2 col-12">
-
-    {% if is_granted("ROLE_ADMIN") %}
-        <div class=" col-3 ">
-            <a href="{{path('app_admin')}}" class="btn btn-primary current-btn col-10 " role="button"> Accéder à l'admin</a>
-        </div>
-
-    {% endif %}
     
-        <div class="{% if is_granted("ROLE_ADMIN") %} col-3 {% else %} col-4 {% endif %}">
-            <a href="{{path('app_accountPassword')}}" class="btn btn-primary current-btn col-10 " role="button"> Modifier mon mot de passe</a>
-        </div>
-        <div class="{% if is_granted("ROLE_ADMIN") %} col-3 {% else %} col-4 {% endif %}">
-            <a href="{{path('app_account_adress')}}" class="btn btn-primary current-btn col-10 " role="button"> Gérer mes adresses</a>
-        </div>
-        <div class="{% if is_granted("ROLE_ADMIN") %} col-3 {% else %} col-4 {% endif %}">
-            <a href="{{path('app_account_order')}}" class="btn btn-primary current-btn col-10 " role="button"> Mes commandes</a>
-        </div>
-
-    </div> #}
 
     <div class="container col-12 g-2">
         {% if is_granted("ROLE_ADMIN") %}
         <div class="card col-2">
             <a href="{{path('app_admin')}}">
                 <div class="box">
-                <div class="content">
-                    <i class="fa-solid fa-briefcase"></i>
-                    <h3>Accéder à l'admin</h3>
-                </div>
+                    <div class="content">
+                        <i class="fa-solid fa-briefcase"></i>
+                        <h3>Accéder à l'admin</h3>
+                    </div>
                 </div>
             </a>
         </div>
@@ -62,10 +43,10 @@
         <div class="card {% if is_granted("ROLE_ADMIN") %} col-2 {% else %} col-3 {% endif %}">
             <a href="{{path('app_account_adress')}}">
                 <div class="box">
-                <div class="content">
-                    <i class="fa-solid fa-house-circle-check"></i>
-                    <h3>Gérer mes adresses</h3>
-                </div>
+                    <div class="content">
+                        <i class="fa-solid fa-house-circle-check"></i>
+                        <h3>Gérer mes adresses</h3>
+                    </div>
                 </div>
             </a>
         </div>
@@ -73,12 +54,13 @@
         <div class="card {% if is_granted("ROLE_ADMIN") %} col-2 {% else %} col-3 {% endif %}">
             <a href="{{path('app_account_order')}}">
                 <div class="box">
-                <div class="content">
-                    <i class="fa-solid fa-wallet"></i>
-                    <h3>Mes commandes</h3>
-                </div>
+                    <div class="content">
+                        <i class="fa-solid fa-wallet"></i>
+                        <h3>Mes commandes</h3>
+                    </div>
                 </div>
             </a>
+        </div>
 
     </div>
 
