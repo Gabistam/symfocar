@@ -6,8 +6,8 @@ services:
     environment:
       MYSQL_DATABASE: ${MYSQL_DB:-symfoprojet3}
       MYSQL_USER: ${MYSQL_USER:-root}
-      MYSQL_PASSWORD: ${MYSQL_PASSWORD:-Root8888!}
-      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:-Root8888!}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD:-}
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:-}
     ports:
       - "3306:3306"
     volumes:
